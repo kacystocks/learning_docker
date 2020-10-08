@@ -1,0 +1,51 @@
+version: '3'
+services:
+    mybuntu:
+        image: ubuntu:latest
+        restart: always
+        ports:
+            - "8080:80"
+        command: >
+            bash -c "apt update &&
+                apt upgrade -y &&
+                apt install openssh-client openssh-server -y &&
+                apt install git -y &&
+                apt install python3 -y &&
+                apt install vim -y &&
+                apt update &&
+                apt upgrade -y"
+
+    mydeb0:
+        image: debian:latest
+        restart: always
+        ports:
+            - "9090:80"
+        links:
+            - mybuntu
+        command: >
+            bash -c "apt update &&
+                apt upgrade -y &&
+                apt install openssh-client openssh-server -y &&
+                apt install git -y &&
+                apt install python3 -y &&
+                apt install vim -y &&
+                apt update &&
+                apt upgrade -y"
+
+    mydeb1:
+        image: debian:latest
+        restart: always
+        ports:
+            - "7070:80"
+        links:
+            - mybuntu
+        command: >
+            bash -c "apt update &&
+                apt upgrade -y &&
+                apt install openssh-client openssh-server -y &&
+                apt install git -y &&
+                apt install python3 -y &&
+                apt install vim -y &&
+                apt update &&
+                apt upgrade -y"
+        
